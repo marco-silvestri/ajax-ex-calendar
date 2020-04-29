@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="assets/styles/main.css">
 </head>
 <body>
+
+    <div id="calendar">
+        <h2 class="calendar__month">
+        </h2>
+    </div>
     
     <script id="template-calendar" type="text/x-handlebars-template">
-        button.
-        <h2 class="calendar__month">
-            {{thisMonth}}
-        </h2>
         <div class="calendar__day {{isHoliday}}" data-datePointer="{{pointerDate}}">
             <span class="calendar__day__date">
                 {{thisDate}}
