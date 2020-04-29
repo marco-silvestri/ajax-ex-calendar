@@ -6,10 +6,12 @@ $(document).ready(function () {
     var source = $('#template-calendar').html();
     var template = Handlebars.compile(source);
 
+    //  jQuery nav
     var calendarApp = $('#calendar');
     var calendarMonth = $('.calendar__month');
 
-    printMonth(dateOnLoad, calendarMonth, template, calendarApp);
+    printMonth(dateOnLoad, template, calendarMonth, calendarApp);
+    markHoliday(dateOnLoad);
 
 });
 
@@ -17,14 +19,15 @@ $(document).ready(function () {
  *  FUNCTIONS
  **************/
 
-function printMonth(date, month, template, destination){
+// Print all the daysInMonth of a DATE in a DESTINATION, toghether with a MONTHHEADER 
+function printMonth(date, template, monthHeader, destination){
     //  Retrieve the days in a month
     var daysinMonth = date.daysInMonth();
 
     //  Retrieve the literal month and the year
     var monthAndYear = date.format('MMMM YYYY');
 
-    month.text(monthAndYear);
+    monthHeader.text(monthAndYear);
 
     //  Print the dates
     for (var i = 1; i <= daysinMonth; i++){
@@ -38,12 +41,40 @@ function printMonth(date, month, template, destination){
         var dateTemplate = {
             thisDate : thisDate.format('DD'),
             thisName : thisDate.format('ddd'),
+            pointerDate : thisDate.format('YYYY-MM-DD')
         }
 
         //  Compile the template
         var output = template(dateTemplate);
         destination.append(output);
-
     }
+};
 
+function markHoliday(date){
+    //  API Call
+    var myApi = 'https://flynn.boolean.careers/exercises/api/holidays';
+    
+    $.ajax({
+        type: "GET",
+        url: myApi,
+        data: {
+            year : date.year(),
+            month : date.month()
+        },
+        success: function (response) {
+            var holidays = response.response;
+            for (var i = 0; i < holidays.length; i++){
+                var thisHoliday = holidays[i];
+                var holidayCheck = $('.calendar__day[data-datePointer="' + thisHoliday.date + '"]');
+                console.log(holidayCheck);
+                
+                if (holidayCheck){
+                    holidayCheck.addClass('holiday');
+                }
+            }
+        },
+        error: function(){
+            console.log('Cannot connect to the API');
+        }       
+    });
 };
