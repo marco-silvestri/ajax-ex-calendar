@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Marco Silvestri 2020</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+</head>
+<body>
+    
+    <script id="template-calendar" type="text/x-handlebars-template">
+        button.
+        <h2 class="calendar__month">
+            {{thisMonth}}
+        </h2>
+        <div class="calendar__day {{isHoliday}}" data-datePointer="{{pointerDate}}">
+            <span class="calendar__day__date">
+                {{thisDate}}
+            </span>
+            <span class="calendar__day__name">
+                {{thisName}}
+            </span>
+        </div>
+    </script>
+
+    <!-- Load JS and dependencies -->
+    <script src="assets/scripts/jquery-3.5.0.min.js"></script>
+    <script src="assets/scripts/handlebars.min-v4.7.6.js"></script>
+    <script src="assets/scripts/moment.min.js"></script>
+    <script src="assets/scripts/main.js"></script>
+</body>
+</html>
