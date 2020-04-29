@@ -9,8 +9,29 @@ $(document).ready(function () {
     //  jQuery nav
     var calendarApp = $('#calendar');
     var calendarMonth = $('.calendar__month');
+    var calendarDays = $('.calendar__print-area');
 
-    printMonth(dateOnLoad, template, calendarMonth, calendarApp);
+    // Buttons
+    var buttonNext = $('.next');
+    var buttonPrevious = $('.previous')
+
+    buttonNext.click(function() {
+        dateOnLoad.add(1, 'M');
+        // Clean the area
+        calendarDays.html('');
+        printMonth(dateOnLoad, template, calendarMonth, calendarDays);
+        markHoliday(dateOnLoad); 
+    });
+
+    buttonPrevious.click(function() {
+        dateOnLoad.subtract(1, 'M');
+        // Clean the area
+        calendarDays.html('');
+        printMonth(dateOnLoad, template, calendarMonth, calendarDays);
+        markHoliday(dateOnLoad); 
+    });
+
+    printMonth(dateOnLoad, template, calendarMonth, calendarDays);
     markHoliday(dateOnLoad);
 
 });
@@ -53,7 +74,6 @@ function printMonth(date, template, monthHeader, destination){
 function markHoliday(date){
     //  API Call
     var myApi = 'https://flynn.boolean.careers/exercises/api/holidays';
-    
     $.ajax({
         type: "GET",
         url: myApi,
@@ -66,8 +86,6 @@ function markHoliday(date){
             for (var i = 0; i < holidays.length; i++){
                 var thisHoliday = holidays[i];
                 var holidayCheck = $('.calendar__day[data-datePointer="' + thisHoliday.date + '"]');
-                console.log(holidayCheck);
-                
                 if (holidayCheck){
                     holidayCheck.addClass('holiday');
                 }
