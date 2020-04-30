@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar - Marco Silvestri 2020</title>
     <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap">
+
 </head>
 <body>
 
@@ -21,12 +23,15 @@
     </div>
     
     <script id="template-calendar" type="text/x-handlebars-template">
-        <div class="calendar__day {{isHoliday}}" data-datePointer="{{pointerDate}}">
+        <div class="calendar__day" data-datePointer="{{pointerDate}}">
             <span class="calendar__day__date">
                 {{thisDate}}
             </span>
             <span class="calendar__day__name">
                 {{thisName}}
+            </span>
+            <span class="calendar__day__holiday" data-datePointer="{{pointerDate}}">
+                {{thisHoliday}}
             </span>
         </div>
     </script>

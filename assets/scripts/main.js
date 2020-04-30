@@ -39,6 +39,22 @@ $(document).ready(function () {
 
     showCompleteCalendar(dateOnLoad, template, calendarMonth, calendarDays);
 
+    $('#calendar').on('mouseenter', '.calendar__day', function(){
+        $(this).children('span.calendar__day__holiday').show();
+    });
+
+    $('#calendar').on('mouseleave', '.calendar__day', function(){
+        $(this).children('span.calendar__day__holiday').hide(); 
+    });
+
+    /*
+    $('.calendar__day').mouseover(function () { 
+        $(this).children('span.calendar__day__holiday').show(); 
+    });*/
+/*
+    $('.calendar__day').mouseout(function () { 
+        $(this).children('span.calendar__day__holiday').hide(); 
+    });*/
 });
 
 /**************
@@ -74,7 +90,7 @@ function printMonth(date, template, monthHeader, destination){
         var dateTemplate = {
             thisDate : thisDate.format('DD'),
             thisName : thisDate.format('ddd'),
-            pointerDate : thisDate.format('YYYY-MM-DD')
+            pointerDate : thisDate.format('YYYY-MM-DD'),
         }
 
         //  Compile the template
@@ -100,6 +116,7 @@ function markHoliday(date){
                 var holidayCheck = $('.calendar__day[data-datePointer="' + thisHoliday.date + '"]');
                 if (holidayCheck){
                     holidayCheck.addClass('holiday');
+                    $('.calendar__day__holiday[data-datePointer="' + thisHoliday.date + '"]').append(holidays[i].name);
                 }
             }
         },

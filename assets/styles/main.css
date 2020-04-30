@@ -1,8 +1,23 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Typography */
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #EDEAE5;
+}
+
+h2 {
+    font-size: 4em;
+    color: #026670;
+}
+
+/* App wrappers */
 
 #calendar {
     width: 70%;
@@ -13,14 +28,16 @@
     align-items: center;
     justify-content: space-between;
 }
-.calendar__header {
-    line-height: 2;
-}
 
 .calendar__buttons button {
     padding: 5px 10px;
-    border: 2px solid black;
+    border: 2px solid #026670;
     border-radius: 5px;
+    background-color: #9FEDD7;
+}
+
+.calendar__buttons button:hover {
+    background-color: #FCE181;
 }
 
 .calendar__print-area {
@@ -32,27 +49,44 @@
 
 .calendar__day {
     position: relative;
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
+    width: 120px;
+    height: 150px;
+    background-color: #FEF9C7;
+    border: 1px solid #FCE181;
     border-radius: 3px;
     padding: 5px;
     margin: 5px;
+}
+
+.calendar__day__date,
+.calendar__day__name {
+    background-color: #9FEDD7;
+    color: #026670;
+    display: inline-block;
+    width: 110px;
 }
 
 .calendar__day__date {
     position: absolute;
     top: 5px;
     left: 5px;
+    font-weight: 700;
 }
 
 .calendar__day__name {
     position: absolute;
     bottom: 5px;
-    right: 5px;
+    text-align: right;
+    font-weight: 200;
 }
 
+.calendar__day.holiday {
+    border: 1px solid #FEF9C7;
+    background-color: #FCE181;;
+}
 
-.holiday {
-    color: red;
+span.calendar__day__holiday {
+    display: none;  /* jQuery */
+    position: absolute;
+    top: 30px;
 }
