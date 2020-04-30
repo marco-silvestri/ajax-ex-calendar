@@ -1,3 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#calendar {
+    width: 70%;
+    min-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.calendar__header {
+    line-height: 2;
+}
+
+.calendar__buttons button {
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.calendar__print-area {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin: 50px;
+}
+
+.calendar__day {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.calendar__day__date {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.calendar__day__name {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+
 .holiday {
     color: red;
 }
