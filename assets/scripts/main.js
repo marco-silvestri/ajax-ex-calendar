@@ -7,7 +7,6 @@ $(document).ready(function () {
     var template = Handlebars.compile(source);
 
     //  jQuery nav
-    var calendarApp = $('#calendar');
     var calendarMonth = $('.calendar__month');
     var calendarDays = $('.calendar__print-area');
 
@@ -15,30 +14,43 @@ $(document).ready(function () {
     var buttonNext = $('.next');
     var buttonPrevious = $('.previous')
 
+
     buttonNext.click(function() {
         dateOnLoad.add(1, 'M');
-        // Clean the area
-        calendarDays.html('');
-        printMonth(dateOnLoad, template, calendarMonth, calendarDays);
-        markHoliday(dateOnLoad); 
+        if (dateOnLoad.isAfter(moment('2018-12-01'))){
+            alert('Sorry, cannot go past that'); 
+            dateOnLoad = moment('2018-12-01');
+        }
+        else {
+            showCompleteCalendar(dateOnLoad, template, calendarMonth, calendarDays);         
+        }
     });
 
     buttonPrevious.click(function() {
         dateOnLoad.subtract(1, 'M');
-        // Clean the area
-        calendarDays.html('');
-        printMonth(dateOnLoad, template, calendarMonth, calendarDays);
-        markHoliday(dateOnLoad); 
+        if (dateOnLoad.isBefore(moment('2018-01-01'))){
+            alert('Sorry, cannot go behind that'); 
+            dateOnLoad = moment('2018-01-01');
+        }
+        else {
+            showCompleteCalendar(dateOnLoad, template, calendarMonth, calendarDays);       
+        }
     });
 
-    printMonth(dateOnLoad, template, calendarMonth, calendarDays);
-    markHoliday(dateOnLoad);
+    showCompleteCalendar(dateOnLoad, template, calendarMonth, calendarDays);
 
 });
 
 /**************
  *  FUNCTIONS
  **************/
+
+// Consolidate all functions in one
+function showCompleteCalendar(dateOnLoad, template, calendarMonth, calendarDays){
+    calendarDays.html('');
+    printMonth(dateOnLoad, template, calendarMonth, calendarDays);
+    markHoliday(dateOnLoad);
+};
 
 // Print all the daysInMonth of a DATE in a DESTINATION, toghether with a MONTHHEADER 
 function printMonth(date, template, monthHeader, destination){
